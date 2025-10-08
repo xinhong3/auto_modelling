@@ -1,0 +1,325 @@
+// --- Course Facts (course_id, credits) ---
+course(cse114,3).
+course(cse214,3).
+course(cse215,3).
+course(cse150,3).
+course(cse216,3).
+course(cse220,3).
+course(cse160,3).
+course(cse161,3).
+course(cse260,3).
+course(cse261,3).
+course(cse303,3).
+course(cse350,3).
+course(cse310,3).
+course(cse316,3).
+course(cse320,3).
+course(cse373,3).
+course(cse385,3).
+course(cse416,3).
+course(cse475,3).
+course(cse495,3).
+course(cse496,3).
+course(cse301,3).
+course(cse312,3).
+course(cse300,3).
+course(ams151,3).
+course(ams161,3).
+course(mat125,3).
+course(mat126,3).
+course(mat127,3).
+course(mat131,3).
+course(mat132,3).
+course(mat211,3).
+course(ams210,3).
+course(ams301,3).
+course(ams310,3).
+course(ams311,3).
+course(bio201,3).
+course(bio202,3).
+course(bio203,3).
+course(bio204,1).
+course(che131,3).
+course(che132,3).
+course(che133,1).
+course(che152,3).
+course(che154,1).
+course(che321,3).
+course(che322,3).
+course(che331,3).
+course(che332,3).
+course(phy125,3).
+course(phy126,3).
+course(phy127,3).
+course(phy131,3).
+course(phy132,3).
+course(phy133,1).
+course(phy134,1).
+course(phy141,3).
+course(phy142,3).
+course(phy251,3).
+course(phy252,3).
+course(ast203,3).
+course(ast205,3).
+course(geo102,3).
+course(geo103,3).
+course(geo112,3).
+course(geo113,3).
+course(geo122,3).
+course(ese440,3).
+course(ese441,3).
+
+// --- Course Groupings ---
+intro_course(cse114).
+intro_course(cse214).
+intro_course(cse215).
+intro_course(cse150).
+intro_course(cse216).
+intro_course(cse220).
+intro_alt(cse160).
+intro_alt(cse161).
+intro_alt(cse260).
+intro_alt(cse261).
+
+advanced_course(cse303).
+advanced_course(cse350).
+advanced_course(cse310).
+advanced_course(cse316).
+advanced_course(cse320).
+advanced_course(cse373).
+advanced_course(cse385).
+advanced_course(cse416).
+
+advanced_alt(ese440).
+advanced_alt(ese441).
+
+elective_exclude(cse475).
+elective_exclude(cse495).
+elective_exclude(cse496).
+elective_exclude(cse301).
+
+calc_course(ams151).
+calc_course(ams161).
+calc_alt(mat125).
+calc_alt(mat126).
+calc_alt(mat127).
+calc_alt(mat131).
+calc_alt(mat132).
+
+linear_course(mat211).
+linear_course(ams210).
+
+math_course(ams301).
+prob_course(ams310).
+prob_course(ams311).
+
+nat_sci_combo(bio201,bio204).
+nat_sci_combo(bio202,bio204).
+nat_sci_combo(bio203,bio204).
+nat_sci_combo(che131,che133).
+nat_sci_combo(che152,che154).
+nat_sci_combo(phy126,phy133).
+nat_sci_combo(phy131,phy133).
+nat_sci_combo(phy141,phy133).
+
+nat_sci_additional(ast203).
+nat_sci_additional(ast205).
+nat_sci_additional(che132).
+nat_sci_additional(che321).
+nat_sci_additional(che322).
+nat_sci_additional(che331).
+nat_sci_additional(che332).
+nat_sci_additional(geo102).
+nat_sci_additional(geo103).
+nat_sci_additional(geo112).
+nat_sci_additional(geo113).
+nat_sci_additional(geo122).
+nat_sci_additional(phy125).
+nat_sci_additional(phy127).
+nat_sci_additional(phy132).
+nat_sci_additional(phy134).
+nat_sci_additional(phy142).
+nat_sci_additional(phy251).
+nat_sci_additional(phy252).
+
+nat_sci_additional(X) :- nat_sci_combo(X,_).
+nat_sci_additional(X) :- nat_sci_combo(_,X).
+
+ethics_course(cse312).
+writing_course(cse300).
+
+// --- Student Records (to be filled with facts for each student) ---
+// completed(student_id, course_id, grade, institution).
+// Example: completed(john, cse114, b, sbu).
+
+// --- Helper Predicates ---
+letter_grade(grade_a).
+letter_grade(grade_a_minus).
+letter_grade(grade_b_plus).
+letter_grade(grade_b).
+letter_grade(grade_b_minus).
+letter_grade(grade_c_plus).
+letter_grade(grade_c).
+letter_grade(grade_c_minus).
+letter_grade(grade_d_plus).
+letter_grade(grade_d).
+letter_grade(grade_f).
+
+grade_value(grade_a,4.0).
+grade_value(grade_a_minus,3.7).
+grade_value(grade_b_plus,3.3).
+grade_value(grade_b,3.0).
+grade_value(grade_b_minus,2.7).
+grade_value(grade_c_plus,2.3).
+grade_value(grade_c,2.0).
+grade_value(grade_c_minus,1.7).
+grade_value(grade_d_plus,1.3).
+grade_value(grade_d,1.0).
+grade_value(grade_f,0.0).
+
+grade_c_or_higher(G) :- grade_value(G,V), V >= 2.0.
+
+// --- Requirement 1: Introductory Courses ---
+// Option 1: CSE114, CSE214, (CSE215 or CSE150), CSE216, CSE220
+intro_req1(S) :- completed(S,cse114,G1,_), grade_c_or_higher(G1),
+                 completed(S,cse214,G2,_), grade_c_or_higher(G2),
+                 (completed(S,cse215,G3,_) ; completed(S,cse150,G3,_)), grade_c_or_higher(G3),
+                 completed(S,cse216,G4,_), grade_c_or_higher(G4),
+                 completed(S,cse220,G5,_), grade_c_or_higher(G5).
+
+// Option 2: CSE160, CSE161, CSE260, CSE261 (substitute for CSE114, CSE214, CSE216)
+intro_req2(S) :- completed(S,cse160,G1,_), grade_c_or_higher(G1),
+                 completed(S,cse161,G2,_), grade_c_or_higher(G2),
+                 completed(S,cse260,G3,_), grade_c_or_higher(G3),
+                 completed(S,cse261,G4,_), grade_c_or_higher(G4),
+                 completed(S,cse220,G5,_), grade_c_or_higher(G5).
+
+intro_courses_completed(S) :- intro_req1(S).
+intro_courses_completed(S) :- intro_req2(S).
+
+// --- Requirement 2: Advanced Courses ---
+// CSE303 or CSE350, CSE310, CSE316, CSE320, CSE373 or CSE385, CSE416
+// ESE double majors may substitute ESE440, ESE441 for CSE416
+advanced_req(S) :- 
+    (completed(S,cse303,G1,_) ; completed(S,cse350,G1,_)), grade_c_or_higher(G1),
+    completed(S,cse310,G2,_), grade_c_or_higher(G2),
+    completed(S,cse316,G3,_), grade_c_or_higher(G3),
+    completed(S,cse320,G4,_), grade_c_or_higher(G4),
+    (completed(S,cse373,G5,_) ; completed(S,cse385,G5,_)), grade_c_or_higher(G5),
+    (completed(S,cse416,G6,_) ; (completed(S,ese440,G6a,_), completed(S,ese441,G6b,_), grade_c_or_higher(G6a), grade_c_or_higher(G6b))),
+    (completed(S,cse416,G6,_) -> grade_c_or_higher(G6) ; true).
+
+advanced_courses_completed(S) :- advanced_req(S).
+
+// --- Requirement 3: Four Upper-Division Technical CSE Electives (>=3 credits, not excluded) ---
+upper_division(C) :- course(C,_), sub_atom(C,3,1,'3',_), !.
+upper_division(C) :- course(C,_), sub_atom(C,3,1,'4',_), !.
+
+technical_elective(C) :- course(C,Cr), Cr >= 3, upper_division(C), not elective_exclude(C), not non_technical(C).
+non_technical(C) :- elective_exclude(C).
+
+student_tech_elective(S,C) :- completed(S,C,G,_), technical_elective(C), grade_c_or_higher(G).
+
+tech_elective_count(S, count<C>) :- student_tech_elective(S,C).
+electives_completed(S) :- tech_elective_count(S,N), N >= 4.
+
+// --- Requirement 4: Calculus Sequence ---
+// AMS151+AMS161 or MAT125+MAT126+MAT127 or MAT131+MAT132 or placement
+calc_seq1(S) :- completed(S,ams151,G1,_), grade_c_or_higher(G1), completed(S,ams161,G2,_), grade_c_or_higher(G2).
+calc_seq2(S) :- completed(S,mat125,G1,_), grade_c_or_higher(G1), completed(S,mat126,G2,_), grade_c_or_higher(G2), completed(S,mat127,G3,_), grade_c_or_higher(G3).
+calc_seq3(S) :- completed(S,mat131,G1,_), grade_c_or_higher(G1), completed(S,mat132,G2,_), grade_c_or_higher(G2).
+calc_seq4(S) :- placement_exam_passed(S,mat).
+
+calc_completed(S) :- calc_seq1(S).
+calc_completed(S) :- calc_seq2(S).
+calc_completed(S) :- calc_seq3(S).
+calc_completed(S) :- calc_seq4(S).
+
+// --- Requirement 5: Linear Algebra (one of) ---
+linear_completed(S) :- completed(S,mat211,G,_), grade_c_or_higher(G).
+linear_completed(S) :- completed(S,ams210,G,_), grade_c_or_higher(G).
+
+// --- Requirement 6: AMS301 and (AMS310 or AMS311) ---
+math_completed(S) :- completed(S,ams301,G1,_), grade_c_or_higher(G1),
+                     (completed(S,ams310,G2,_) ; completed(S,ams311,G2,_)), grade_c_or_higher(G2).
+
+// --- Requirement 7: One Natural Science Lecture/Lab Combo ---
+student_nat_sci_combo(S,C1,C2) :- nat_sci_combo(C1,C2), completed(S,C1,G1,_), completed(S,C2,G2,_), letter_grade(G1), letter_grade(G2).
+nat_sci_combo_completed(S) :- student_nat_sci_combo(S,_,_).
+
+// --- Requirement 8: Additional Natural Science Courses (from combos or additional list) ---
+// Must total at least 9 credits with requirement 7
+student_nat_sci_course(S,C) :- (nat_sci_combo(C,_) ; nat_sci_combo(_,C) ; nat_sci_additional(C)), completed(S,C,G,_), letter_grade(G).
+
+nat_sci_credits(S, sum<Cr>) :- student_nat_sci_course(S,C), course(C,Cr).
+nat_sci_credits_ok(S) :- nat_sci_credits(S,Cr), Cr >= 9.
+
+// --- Requirement 9: Professional Ethics ---
+ethics_completed(S) :- completed(S,cse312,G,_), grade_c_or_higher(G).
+
+// --- Requirement 10: Upper-Division Writing ---
+writing_completed(S) :- completed(S,cse300,G,_), grade_c_or_higher(G).
+
+// --- Residency Requirements ---
+// At least 24 credits from items 1-3 at SBU, at least 18 from items 2-3 at SBU
+item1_course(C) :- intro_course(C).
+item1_course(C) :- intro_alt(C).
+item2_course(C) :- advanced_course(C).
+item2_course(C) :- advanced_alt(C).
+item3_course(C) :- technical_elective(C).
+
+item1_completed_at_sbu(S,C) :- item1_course(C), completed(S,C,_,sbu).
+item2_completed_at_sbu(S,C) :- item2_course(C), completed(S,C,_,sbu).
+item3_completed_at_sbu(S,C) :- item3_course(C), completed(S,C,_,sbu).
+
+item1_credits_at_sbu(S, sum<Cr>) :- item1_completed_at_sbu(S,C), course(C,Cr).
+item2_credits_at_sbu(S, sum<Cr>) :- item2_completed_at_sbu(S,C), course(C,Cr).
+item3_credits_at_sbu(S, sum<Cr>) :- item3_completed_at_sbu(S,C), course(C,Cr).
+
+item123_credits_at_sbu(S,Sum) :- item1_credits_at_sbu(S,A), item2_credits_at_sbu(S,B), item3_credits_at_sbu(S,C), Sum = A+B+C.
+item23_credits_at_sbu(S,Sum) :- item2_credits_at_sbu(S,B), item3_credits_at_sbu(S,C), Sum = B+C.
+
+residency_item123_ok(S) :- item123_credits_at_sbu(S,Sum), Sum >= 24.
+residency_item23_ok(S) :- item23_credits_at_sbu(S,Sum), Sum >= 18.
+
+// --- Grading Requirements ---
+// All courses in 1-6, 9, 10: C or higher
+all_core_courses(C) :- item1_course(C).
+all_core_courses(C) :- item2_course(C).
+all_core_courses(C) :- item3_course(C).
+all_core_courses(C) :- calc_course(C).
+all_core_courses(C) :- calc_alt(C).
+all_core_courses(C) :- linear_course(C).
+all_core_courses(C) :- math_course(C).
+all_core_courses(C) :- prob_course(C).
+all_core_courses(cse312).
+all_core_courses(cse300).
+
+core_course_passed(S,C) :- all_core_courses(C), completed(S,C,G,_), grade_c_or_higher(G).
+
+// For 7 and 8: GPA at least 2.0
+nat_sci_grade_points(S, sum<Pts>) :- student_nat_sci_course(S,C), completed(S,C,G,_), grade_value(G,V), course(C,Cr), Pts = V*Cr.
+nat_sci_credits_total(S, sum<Cr>) :- student_nat_sci_course(S,C), course(C,Cr).
+nat_sci_gpa(S, GPA) :- nat_sci_grade_points(S,Pts), nat_sci_credits_total(S,Cr), Cr > 0, GPA = Pts/Cr.
+nat_sci_gpa_ok(S) :- nat_sci_gpa(S,GPA), GPA >= 2.0.
+
+// --- Total Credits for Major ---
+major_credits(S, sum<Cr>) :- completed(S,C,_,_), (item1_course(C) ; item2_course(C) ; item3_course(C) ; calc_course(C) ; calc_alt(C) ; linear_course(C) ; math_course(C) ; prob_course(C) ; nat_sci_additional(C) ; ethics_course(C) ; writing_course(C)), course(C,Cr).
+major_credits_ok(S) :- major_credits(S,Cr), Cr >= 80.
+
+// --- Graduation Predicate ---
+graduation_requirements_met(S) :-
+    intro_courses_completed(S),
+    advanced_courses_completed(S),
+    electives_completed(S),
+    calc_completed(S),
+    linear_completed(S),
+    math_completed(S),
+    nat_sci_combo_completed(S),
+    nat_sci_credits_ok(S),
+    ethics_completed(S),
+    writing_completed(S),
+    residency_item123_ok(S),
+    residency_item23_ok(S),
+    nat_sci_gpa_ok(S),
+    major_credits_ok(S).

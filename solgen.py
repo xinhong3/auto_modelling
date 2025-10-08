@@ -18,7 +18,7 @@ def to_text(x):
         return "\n".join(x)
     return str(x)
 
-def build_prompt(d, target_language=None):
+def build_prompt(d, with_ref=True):
     parts = []
     parts.append(f"Language: {d.get('language','')}")
     parts.append(f"Problem: {d.get('problem','')}")
@@ -41,12 +41,14 @@ def build_prompt(d, target_language=None):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--path", required=True, help="path to the problem json")
+    ap.add_argument("--with_ref", type=int, choices=[0, 1], default=0,
+                help="include language reference in prompt (0 or 1)")
     ap.add_argument("--model", default="gpt-4.1")
     ap.add_argument("--temperature", type=float, default=0.0)
     args = ap.parse_args()
 
     data = load_json(args.path)
-    prompt = build_prompt(data)
+    prompt = build_prompt(data, with_ref=bool(args.with_ref))
 
     api_key = OPENAI_API_KEY or os.getenv("OPENAI_API_KEY")
     client = OpenAIProvider(api_key=api_key)
