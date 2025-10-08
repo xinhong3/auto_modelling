@@ -1,0 +1,277 @@
+// --- Course Facts: course(CourseID, Credits) ---
+
+// Required Introductory Courses
+course(cse114,3).
+course(cse214,3).
+course(cse215,3).
+course(cse150,3).
+course(cse216,3).
+course(cse220,3).
+course(cse160,3).
+course(cse161,3).
+course(cse260,3).
+course(cse261,3).
+
+// Required Advanced Courses
+course(cse303,3).
+course(cse350,3).
+course(cse310,3).
+course(cse316,3).
+course(cse320,3).
+course(cse373,3).
+course(cse385,3).
+course(cse416,3).
+course(ese440,3).
+course(ese441,3).
+
+// Computer Science Electives (upper-division technical CSE electives, 3+ credits)
+upper_div_cse_elective(C) :- course(C,Cr), cse_course(C), upper_division(C), Cr >= 3, technical(C), not excluded_elective(C).
+excluded_elective(cse475).
+excluded_elective(cse495).
+excluded_elective(cse496).
+excluded_elective(cse301).
+
+// Calculus
+course(ams151,4).
+course(ams161,3).
+course(mat125,3).
+course(mat126,3).
+course(mat127,3).
+course(mat131,4).
+course(mat132,4).
+
+// Linear Algebra
+course(mat211,3).
+course(ams210,3).
+
+// Discrete Math & Probability
+course(ams301,3).
+course(ams310,3).
+course(ams311,3).
+
+// Natural Science Lecture/Lab Combos
+course(bio201,3).
+course(bio202,3).
+course(bio203,3).
+course(bio204,2).
+course(che131,4).
+course(che133,1).
+course(che152,4).
+course(che154,1).
+course(phy126,3).
+course(phy133,1).
+course(phy131,3).
+course(phy141,3).
+
+// Additional Natural Science
+course(ast203,3).
+course(ast205,3).
+course(che132,3).
+course(che321,3).
+course(che322,3).
+course(che331,3).
+course(che332,3).
+course(geo102,3).
+course(geo103,3).
+course(geo112,3).
+course(geo113,3).
+course(geo122,3).
+course(phy125,3).
+course(phy127,3).
+course(phy132,3).
+course(phy134,3).
+course(phy142,3).
+course(phy251,3).
+course(phy252,3).
+
+// Professional Ethics
+course(cse312,3).
+
+// Upper-Division Writing
+course(cse300,3).
+
+// --- Course Properties ---
+
+// CSE courses
+cse_course(C) :- course(C,_), prefix(C,cse).
+prefix(Course,Prefix) :- atom_concat(Prefix,_,Course).
+
+// Upper-division: course number >= 300
+upper_division(C) :- course(C,_), course_number(C,N), N >= 300.
+course_number(C,N) :- course_code_number(C,N).
+// Helper: extract number from course code
+course_code_number(C,N) :- atom_codes(C,[_1,_2,_3|Rest]), number_codes(N,Rest).
+
+// Technical CSE electives: not excluded, not non-technical
+technical(C) :- cse_course(C), not excluded_elective(C), not non_technical(C).
+non_technical(cse301).
+
+// --- Student Records: taken(Student,Course,Grade,Institution) ---
+
+// Example: taken(alice,cse114,a,stonybrook).
+
+// --- Requirement 1: Required Introductory Courses ---
+
+// Option 1: CSE 114, 214, (215 or 150), 216, 220
+req1_option1(S) :- passed(S,cse114), passed(S,cse214), (passed(S,cse215); passed(S,cse150)), passed(S,cse216), passed(S,cse220).
+
+// Option 2: CSE 160, 161, 260, 261 (substitute for 114, 214, 216)
+req1_option2(S) :- passed(S,cse160), passed(S,cse161), passed(S,cse260), passed(S,cse261), passed(S,cse220).
+
+req1(S) :- req1_option1(S).
+req1(S) :- req1_option2(S).
+
+// --- Requirement 2: Required Advanced Courses ---
+
+// CSE 303 or 350
+req2_theory(S) :- passed(S,cse303).
+req2_theory(S) :- passed(S,cse350).
+
+// CSE 310, 316, 320
+req2_core(S) :- passed(S,cse310), passed(S,cse316), passed(S,cse320).
+
+// CSE 373 or 385
+req2_algo(S) :- passed(S,cse373).
+req2_algo(S) :- passed(S,cse385).
+
+// CSE 416 or (ESE 440 and ESE 441 with approval)
+req2_software(S) :- passed(S,cse416).
+req2_software(S) :- passed(S,ese440), passed(S,ese441), ese_approval(S).
+
+req2(S) :- req2_theory(S), req2_core(S), req2_algo(S), req2_software(S).
+
+// --- Requirement 3: Four upper-division technical CSE electives (3+ credits each) ---
+
+req3(S) :- count<E>(upper_div_cse_elective_taken(S,E)), E >= 4.
+upper_div_cse_elective_taken(S,C) :- upper_div_cse_elective(C), passed(S,C).
+
+// --- Requirement 4: Calculus Sequence ---
+
+// AMS 151 and AMS 161
+req4_ams(S) :- passed(S,ams151), passed(S,ams161).
+
+// MAT 125, 126, 127
+req4_mat3(S) :- passed(S,mat125), passed(S,mat126), passed(S,mat127).
+
+// MAT 131, 132
+req4_mat2(S) :- passed(S,mat131), passed(S,mat132).
+
+// MAT equivalency via placement exam
+req4_mat_equiv(S) :- mat_placement_equiv(S).
+
+req4(S) :- req4_ams(S).
+req4(S) :- req4_mat3(S).
+req4(S) :- req4_mat2(S).
+req4(S) :- req4_mat_equiv(S).
+
+// --- Requirement 5: Linear Algebra ---
+
+req5(S) :- passed(S,mat211).
+req5(S) :- passed(S,ams210).
+
+// --- Requirement 6: Discrete Math and Probability ---
+
+// AMS 301 and (AMS 310 or AMS 311)
+req6(S) :- passed(S,ams301), (passed(S,ams310); passed(S,ams311)).
+
+// --- Requirement 7: One natural science lecture/lab combination ---
+
+// Define valid lecture/lab combos
+sci_combo(bio201,bio204).
+sci_combo(bio202,bio204).
+sci_combo(bio203,bio204).
+sci_combo(che131,che133).
+sci_combo(che152,che154).
+sci_combo(phy126,phy133).
+sci_combo(phy131,phy133).
+sci_combo(phy141,phy133).
+
+req7(S) :- passed(S,L), passed(S,Lab), sci_combo(L,Lab).
+
+// --- Requirement 8: Additional natural science courses (from above or list), total credits (req7+req8) >= 9 ---
+
+// List of all allowed natural science courses
+allowed_sci(C) :- sci_combo(L,Lab), (C=L; C=Lab).
+allowed_sci(C) :- course(C,_), member(C,[ast203,ast205,che132,che321,che322,che331,che332,geo102,geo103,geo112,geo113,geo122,phy125,phy127,phy132,phy134,phy142,phy251,phy252]).
+
+sci_credit(S,C) :- passed(S,C), allowed_sci(C), course(C,Cr).
+
+total_sci_credits(S,Sum) :- Sum = sum<Cr> : sci_credit(S,C), course(C,Cr).
+
+req8(S) :- total_sci_credits(S,Sum), Sum >= 9.
+
+// --- Requirement 9: Professional Ethics ---
+
+req9(S) :- passed(S,cse312).
+
+// --- Requirement 10: Upper-Division Writing ---
+
+req10(S) :- passed(S,cse300).
+
+// --- Residency Requirements ---
+
+// At least 24 credits from req1, req2, req3 at Stony Brook
+residency_24(S) :- sum<Cr> = Total, Total >= 24,
+    (req1_course(C); req2_course(C); req3_course(C)),
+    taken(S,C,_,stonybrook), course(C,Cr).
+
+// At least 18 credits from req2, req3 at Stony Brook
+residency_18(S) :- sum<Cr> = Total, Total >= 18,
+    (req2_course(C); req3_course(C)),
+    taken(S,C,_,stonybrook), course(C,Cr).
+
+// Helper: enumerate courses in req1, req2, req3
+req1_course(C) :- member(C,[cse114,cse214,cse215,cse150,cse216,cse220,cse160,cse161,cse260,cse261]).
+req2_course(C) :- member(C,[cse303,cse350,cse310,cse316,cse320,cse373,cse385,cse416,ese440,ese441]).
+req3_course(C) :- upper_div_cse_elective(C).
+
+// --- Grading Requirements ---
+
+// Passed: grade is A, A-, B+, B, B-, C+, C
+passed(S,C) :- taken(S,C,G,_), passing_grade(G).
+passing_grade(a).
+passing_grade(a_minus).
+passing_grade(b_plus).
+passing_grade(b).
+passing_grade(b_minus).
+passing_grade(c_plus).
+passing_grade(c).
+
+// For req1-6, 9, 10: must be C or higher
+req_passed(S,C) :- taken(S,C,G,_), req_course(C), passing_grade(G).
+req_course(C) :- req1_course(C).
+req_course(C) :- req2_course(C).
+req_course(C) :- req3_course(C).
+req_course(C) :- member(C,[ams151,ams161,mat125,mat126,mat127,mat131,mat132,mat211,ams210,ams301,ams310,ams311,cse312,cse300]).
+
+// For req7, req8: GPA >= 2.00
+sci_gpa(S,Avg) :- findall(G, (passed(S,C), allowed_sci(C), taken(S,C,G,_)), L), gpa(L,Avg).
+gpa(L,Avg) :- length(L,N), N>0, sum<Points> = Total, (member(G,L), grade_points(G,Points)), Avg = Total/N.
+grade_points(a,4.0).
+grade_points(a_minus,3.7).
+grade_points(b_plus,3.3).
+grade_points(b,3.0).
+grade_points(b_minus,2.7).
+grade_points(c_plus,2.3).
+grade_points(c,2.0).
+grade_points(c_minus,1.7).
+grade_points(d_plus,1.3).
+grade_points(d,1.0).
+grade_points(f,0.0).
+
+sci_gpa_ok(S) :- sci_gpa(S,Avg), Avg >= 2.0.
+
+// All courses for req1-10 must be taken for letter grade
+letter_grade(G) :- member(G,[a,a_minus,b_plus,b,b_minus,c_plus,c,c_minus,d_plus,d,f]).
+all_letter_grades(S) :- taken(S,C,G,_), req_course(C), letter_grade(G).
+
+// --- Graduation: All requirements met ---
+
+graduation_requirements_met(S) :-
+    req1(S), req2(S), req3(S), req4(S), req5(S), req6(S), req7(S), req8(S), req9(S), req10(S),
+    residency_24(S), residency_18(S),
+    all_letter_grades(S),
+    sci_gpa_ok(S),
+    total_credits(S,Total), Total >= 80.
+
+total_credits(S,Sum) :- Sum = sum<Cr> : taken(S,C,_,_), course(C,Cr).
