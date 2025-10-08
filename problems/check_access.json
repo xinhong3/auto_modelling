@@ -1,7 +1,8 @@
 {
     "problem": "checkAccess implementation",
     "description": "",
-    "input_spec": "",
-    "output_spec": "",
-    "language": "python"
+    "input_spec": "Natual language description of the checkAccess function.",
+    "output_spec": "A python function that implements the checkAccess function using high-level comprehensions.",
+    "output_language": "python",
+    "input": ""
 }

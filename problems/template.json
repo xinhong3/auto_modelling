@@ -1,0 +1,8 @@
+{
+    "problem": "Short name for the problem, or some id.", 
+    "description": "High-level description of the problem.",
+    "input_spec": "Specification of the input, note that this is not the actual input.",
+    "output_spec": "Specification of the desired output. Possibly includes the language, function signature, or any general structure of the program.",
+    "output_language": "The output language, e.g., python, datalog, sql, etc.",
+    "input": "This could be optional if the description and input_spec are sufficient."
+}
