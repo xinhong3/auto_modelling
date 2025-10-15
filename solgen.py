@@ -20,7 +20,7 @@ def to_text(x):
 
 def build_prompt(d, with_ref=True):
     parts = []
-    parts.append(f"Language: {d.get('language','')}")
+    parts.append(f"Output language: {d.get('output_language','')}")
     parts.append(f"Problem: {d.get('problem','')}")
     if d.get("description"):
         parts.append(f"Description:\n{to_text(d['description'])}")
@@ -33,7 +33,7 @@ def build_prompt(d, with_ref=True):
     if d.get("input"):
         parts.append(f"Input:\n{d['input']}")
     parts.append("Produce only the final program for the language above, with no explanations.")
-    parts.append(LANGUAGE_REF.get(d.get('language',''), ''))
+    parts.append(LANGUAGE_REF.get(d.get('output_lanaguge',''), ''))
 
     print(parts) # debugging
     return "\n\n".join(parts).strip()

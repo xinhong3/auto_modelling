@@ -1,8 +1,8 @@
 {
-    "problem": "checkAccess implementation",
-    "description": "",
-    "input_spec": "Natual language description of the checkAccess function.",
-    "output_spec": "A python function that implements the checkAccess function using high-level comprehensions.",
-    "output_language": "python",
-    "input": ""
+  "problem": "checkAccess implementation",
+  "description": "The goal is to implement the checkAccess function in Python using high-level comprehensions.",
+  "input_spec": "Natual language description of the checkAccess function.",
+  "output_spec": "A python function that implements the checkAccess function using high-level comprehensions.",
+  "output_language": "python",
+  "input":"Consider an example query in role-based access control (RBAC):\n\nfor CheckAccess(s,op,obj):\n{ r: r in ROLES | [s,r] in SR, [[op,obj],r] in PR }\n\nTo implement this function in python, you only need to know the following things:\n1. {...|...} represents a set comprehension where everything before \"|\" means the range and what's after \"|\" means the test (whether the element should be in the set).\n2. [...] denotes lists and SR, PR are sets of lists, but you can also implement this using tuples."
 }
