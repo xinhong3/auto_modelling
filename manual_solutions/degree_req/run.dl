@@ -1,0 +1,29 @@
+// Run degree requirement rules with input
+// souffle -F input/ -D- run.dl
+.include "degree_requirement.dl"
+
+// Inputs
+.input course(IO=file, filename="course.csv", delimiter=",")
+.input student(IO=file, filename="student.csv", delimiter=",")
+.input taken(IO=file, filename="taken.csv", delimiter=",")
+.input course_group(IO=file, filename="course_group.csv", delimiter=",")
+
+// Declare the following for prettier output
+.decl ReqPassed(s: StudentId, req: symbol)
+ReqPassed(S, "Req1")  :- Req1(S).
+ReqPassed(S, "Req2")  :- Req2(S).
+ReqPassed(S, "Req3")  :- Req3(S).
+ReqPassed(S, "Req4")  :- Req4(S).
+ReqPassed(S, "Req5")  :- Req5(S).
+ReqPassed(S, "Req6")  :- Req6(S).
+ReqPassed(S, "Req7")  :- Req7(S).
+ReqPassed(S, "Req8")  :- Req8(S).
+ReqPassed(S, "Req9")  :- Req9(S).
+ReqPassed(S, "Req10") :- Req10(S).
+ReqPassed(S, "residency")      :- Req_residency(S).
+ReqPassed(S, "total_credits")  :- Req_total_credits(S).
+ReqPassed(S, "all_requirements") :- Cse_degree_requirement_met(S).
+
+// Output
+.output ReqPassed(IO=stdout)
+.output Gpa(IO=stdout)

@@ -1,0 +1,254 @@
+// Degree Requirement for CSE Major at Stony Brook University (Fall 24)
+// Requirement details: https://www.stonybrook.edu/sb/bulletin/current-fall24/academicprograms/cse/degreesandrequirements.php
+// We translate each requirement into a Datalog rule (run with Souffle).
+// Grading system: https://www.stonybrook.edu/ugrdbulletin/policiesandregulations/records_registration/grading_system.php
+
+.decl LetterGPA(letter_grade: symbol, point_per_credit: float)
+.input LetterGPA(IO=file, filename="letter_gpa.csv", delimiter=",")
+
+.type CourseId <: symbol
+.decl course(
+  course_id: CourseId,
+  program: symbol,
+  number: number,     // any course number such as CSE 101A?
+  credit: number
+)
+
+// course_prereq(A, B) means A has B as one of its prerequisite(s).
+// .decl course_prereq(           // Not needed for only checking degree requirements
+//   course_id: CourseId,
+//   prereq_course_id: CourseId
+// )
+
+// Student
+.type StudentId <: symbol
+.decl student(
+  student_id: StudentId,
+  name:    symbol,
+  status:    symbol               // Is this needed?
+)
+
+.type Date <: number
+.type Location <: symbol
+.decl taken(
+  student_id: StudentId,
+  course: CourseId,
+  letter_grade: symbol,
+  where: Location,
+  when: Date
+)
+
+.decl course_group(
+  group_id: symbol,
+  course_id: CourseId
+)
+
+.decl IsLetterGrade(g: symbol)
+IsLetterGrade(G) :- LetterGPA(G, _).
+
+.decl Passed(s: StudentId, c: CourseId)   // Passed is defined to be D or higher, or P
+Passed(S, Cid) :-
+  taken(S, Cid, G, _, _),
+  IsLetterGrade(G),
+  G != "F".
+
+Passed(S, Cid) :-
+  taken(S, Cid, "P", _, _).
+
+.decl PassedWith_C_Or_Higher(s: StudentId, c: CourseId)
+PassedWith_C_Or_Higher(S, Cid) :-
+  taken(S, Cid, G, _, _),
+  LetterGPA(G, PointPerCredit),
+  PointPerCredit >= 2.00.    // C or higher
+
+.decl IsCSEUpperElectives(c: CourseId)
+IsCSEUpperElectives(C) :-    // For now we define upper electives as any CSE course numbered 300 or higher
+  course(C, "cse", Num, _),
+  Num >= 300.
+  // cse_technical_elective(C).
+
+.decl CourseTakenForLetterGrade(s: StudentId, c: CourseId)
+CourseTakenForLetterGrade(S, C) :- 
+  taken(S, C, G, _, _),
+  IsLetterGrade(G).
+
+.decl TotalQualityPoints(s: StudentId, total: float)
+TotalQualityPoints(S, TotalQP) :-      // !doesn't handle retaken courses
+  student(S, _, _),
+  TotalQP = sum QP: {
+    taken(S, C, Grade, _, _),
+    IsLetterGrade(Grade),
+    course(C, _, _, Credit),
+    LetterGPA(Grade, PointPerCredit),
+    QP = to_float(Credit) * PointPerCredit
+  }.
+
+.decl TotalLetterCredits(s: StudentId, total: float)
+TotalLetterCredits(S, TotalLC) :-      // !doesn't handle retaken courses
+  student(S, _, _),
+  TotalLC = sum LCf: {
+    taken(S, C, Grade, _, _),
+    IsLetterGrade(Grade),
+    course(C, _, _, LetterCredit),
+    LCf = to_float(LetterCredit)
+  }.
+
+.decl Gpa(s: StudentId, gpa: float)
+Gpa(S, GPA) :-
+  TotalQualityPoints(S, TotalQP),
+  TotalLetterCredits(S, TotalLC),   // only count letter credits (i.e. no P grade)
+  TotalLC > 0,                      // avoid division by zero
+  GPA = TotalQP / TotalLC.
+
+// All courses taken to satisfy Requirements 1 through 10 must be taken for a letter grade.
+// The courses in Requirements 1-6, 9, and 10 must be passed with a letter grade of C or higher. 
+
+// Requirement 1
+.decl Req1Option1(s: StudentId)
+Req1Option1(S) :- // option has 4 required courses and one choice
+  student(S, _, _),
+  4 = count : {PassedWith_C_Or_Higher(S, C), course_group("cse_maj_req1_opt1", C)},
+  1 <= count : {PassedWith_C_Or_Higher(S, C), course_group("cse_maj_req1_choice", C)}.
+
+.decl Req1Option2(s: StudentId)
+Req1Option2(S) :- // option has 5 required courses and one choice
+  student(S, _, _),
+  5 = count : {PassedWith_C_Or_Higher(S, C), course_group("cse_maj_req1_opt2", C)},
+  1 <= count : {PassedWith_C_Or_Higher(S, C), course_group("cse_maj_req1_choice", C)}.
+
+// Req1: either option 1 or option 2
+.decl Req1(s: StudentId)
+Req1(S) :- Req1Option1(S).
+Req1(S) :- Req1Option2(S).
+
+// Requirement 2: Required Advanced Courses
+.decl Req2(s: StudentId)
+Req2(S) :-
+  student(S, _, _),
+  4 = count : {PassedWith_C_Or_Higher(S, C),course_group("cse_maj_req2", C)},
+  1 <= count : {PassedWith_C_Or_Higher(S, C),course_group("cse_maj_req2_theory", C)},
+  1 <= count : {PassedWith_C_Or_Higher(S, C),course_group("cse_maj_req2_algo", C)}.
+
+// Requirement 3: Four upper-division technical CSE electives
+.decl Req3(s: StudentId)
+Req3(S) :- 
+  student(S, _, _),
+  4 <= count : {PassedWith_C_Or_Higher(S, C), IsCSEUpperElectives(C)}.
+
+// Requirement 4: Calculus Sequence (three options)
+.decl Req4(s: StudentId)
+Req4(S) :-
+  student(S, _, _),
+  2 = count : {PassedWith_C_Or_Higher(S, C), course_group("cse_maj_req4_seq1", C)}.
+
+Req4(S) :-
+  student(S, _, _),
+  3 = count : {PassedWith_C_Or_Higher(S, C), course_group("cse_maj_req4_seq2", C)}.
+
+Req4(S) :- 
+  student(S, _, _), 
+  2 = count : {PassedWith_C_Or_Higher(S, C), course_group("cse_maj_req4_seq3", C)}.
+  
+// Requirement 5
+.decl Req5(s: StudentId)
+Req5(S) :- PassedWith_C_Or_Higher(S, "mat221").
+Req5(S) :- PassedWith_C_Or_Higher(S, "mat222").
+
+// Requirement 6
+.decl Req6(s: StudentId)
+Req6(S) :- 
+  PassedWith_C_Or_Higher(S, "ams301"),
+  (PassedWith_C_Or_Higher(S, "ams310"); PassedWith_C_Or_Higher(S, "ams311")).
+
+// The grade point average for the courses in Requirements 7 and 8 must be at least 2.00.
+
+// Requirement 7
+
+// Science lecture + lab combinations
+.decl sci_combo(lecture: CourseId, lab: CourseId)
+sci_combo("bio201", "bio204").
+sci_combo("bio202", "bio204").
+sci_combo("bio203", "bio204").
+sci_combo("che131", "che133").
+sci_combo("che152", "che154").
+sci_combo("phy126", "phy133").
+sci_combo("phy131", "phy133").
+sci_combo("phy141", "phy133").
+
+.decl Req7(s: StudentId)
+Req7(S) :- 
+  student(S, _, _),
+  1 <= count : {              // At least one combo
+    sci_combo(Lecture,Lab),
+    course(Lecture, _, _, Cr1),
+    course(Lab, _, _, Cr2),
+    taken(S, Lecture, Grade1, _, _), LetterGPA(Grade1, PointPerCredit1),
+    taken(S, Lab, Grade2, _, _),     LetterGPA(Grade2, PointPerCredit2),
+    QP  = to_float(Cr1) * PointPerCredit1 + to_float(Cr2) * PointPerCredit2,
+    LC  = Cr1 + Cr2,
+    GPA = QP / to_float(LC),
+    GPA >= 2.00}.
+
+// Requirement 8
+.decl Req7or8Course(c: CourseId)
+Req7or8Course(C) :- course_group("cse_maj_req7", C).
+Req7or8Course(C) :- course_group("cse_maj_req8", C).
+
+.decl Req8(s: StudentId)
+Req8(S) :-
+  student(S, _, _),
+  TotalCr = sum Cr : {course(C, _, _, Cr), Req7or8Course(C), taken(S, C, _, _, _)},
+  TotalQP = sum QP : {course(C, _, _, Cr), Req7or8Course(C), taken(S, C, Grade, _, _),
+                       LetterGPA(Grade, PointPerCredit),
+                       QP = to_float(Cr) * PointPerCredit},
+  TotalCr >= 9,                       // Credit requirement (>= 9)
+  GPA = TotalQP / to_float(TotalCr),
+  GPA >= 2.00.                        // GPA requirement
+  
+// Requirement 9
+.decl Req9(s: StudentId)
+Req9(S) :- PassedWith_C_Or_Higher(S, "cse312").
+
+// Requirement 10
+.decl Req10(s: StudentId)
+Req10(S) :- PassedWith_C_Or_Higher(S, "cse300").
+
+// "Residency Requirements"
+// At least 24 credits from items 1 to 3 below, and at least 18 credits from items 2 and 3, must be completed at Stony Brook. 
+// Interpreting both the 24 and 18 credits requirements must be completed at Stony Brook.
+
+// Souffle does not support disjunction in aggregates. The following two relations are workarounds.
+.decl CourseGroupOneToThree(c: CourseId)
+CourseGroupOneToThree(C) :-
+  course_group(GroupName, C), contains("cse_maj_req1", GroupName).
+CourseGroupOneToThree(C) :-
+  course_group(GroupName, C), contains("cse_maj_req2", GroupName).
+CourseGroupOneToThree(C) :- 
+  IsCSEUpperElectives(C). // requirement 3 is for upper electives
+
+.decl CourseGroupTwoOrThree(c: CourseId)
+CourseGroupTwoOrThree(C) :-
+  course_group(GroupName, C), contains("cse_maj_req2", GroupName).
+CourseGroupTwoOrThree(C) :- 
+  IsCSEUpperElectives(C). // requirement 3 is for upper electives
+
+.decl Req_residency(s: StudentId)
+Req_residency(S) :- 
+  student(S, _, _),
+  Cr1 = sum Cr1_ : {taken(S, C, _, "stonybrook", _), CourseGroupOneToThree(C), course(C, _, _, Cr1_ )},
+  Cr1 >= 24,
+  Cr2 = sum Cr2_ : {taken(S, C2, _, "stonybrook", _), CourseGroupTwoOrThree(C2), course(C2, _, _, Cr2_)},
+  Cr2 >= 18.
+
+// Total of at least 80 credits
+.decl Req_total_credits(s: StudentId)
+Req_total_credits(S) :-
+  student(S, _, _),
+  TotalCr = sum Cr : {taken(S, C, _, _, _), course(C, _, _, Cr)},
+  TotalCr >= 80.
+
+// Final degree requirement
+.decl Cse_degree_requirement_met(s: StudentId)
+Cse_degree_requirement_met(S) :-
+  Req1(S), Req2(S), Req3(S), Req4(S), Req5(S), Req6(S), Req7(S), Req8(S), Req9(S), Req10(S), 
+  Req_residency(S), Req_total_credits(S).
