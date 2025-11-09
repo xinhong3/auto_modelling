@@ -93,8 +93,8 @@ TotalLetterCredits(S, TotalLC) :-      // !doesn't handle retaken courses
     LCf = to_float(LetterCredit)
   }.
 
-.decl Gpa(s: StudentId, gpa: float)
-Gpa(S, GPA) :-
+.decl GPA(student: StudentId, gpa: float)
+GPA(S, GPA) :-
   TotalQualityPoints(S, TotalQP),
   TotalLetterCredits(S, TotalLC),   // only count letter credits (i.e. no P grade)
   TotalLC > 0,                      // avoid division by zero
