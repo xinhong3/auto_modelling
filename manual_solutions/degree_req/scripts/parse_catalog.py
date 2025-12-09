@@ -7,15 +7,24 @@ from collections import defaultdict
 # DIR_UNPARSED_DOCS = os.path.join('..', 'documents', 'unparsed')
 DIR_PARSED = os.path.join('..', 'documents', 'parsed')
 
+KEY_PROGRAM = 'program'
+KEY_NUMBER = 'number'
+KEY_NAME = 'name'
+KEY_CREDIT = 'credit'
+KEY_PREREQUISITE = 'prerequisite'
+KEY_COREQUISITE = 'corequisite'
+KEY_ANTIREQUISITE = 'anti-requisite'
+KEY_ADVISORY_PREREQUISITE = 'advisory prerequisite'
+
 FIELDNAMES = [
-  'program',
-  'number',
-  'name',
-  'credit',
-  'prerequisite',
-  'Corequisite',
-  'Anti-requisite',
-  'Advisory Prerequisite',
+  KEY_PROGRAM,
+  KEY_NUMBER,
+  KEY_NAME,
+  KEY_CREDIT,
+  KEY_PREREQUISITE,
+  KEY_COREQUISITE,
+  KEY_ANTIREQUISITE,
+  KEY_ADVISORY_PREREQUISITE,
 ]
 
 # Any three-letter program code, e.g., CSE, MAT, AMS, etc.
@@ -67,13 +76,13 @@ def parse_requisite_line(line, rec):
       continue
 
     if label.startswith('prerequisite') and not label.startswith('advisory'):
-      key = 'prerequisite'
+      key = KEY_PREREQUISITE
     elif label.startswith('corequisite'):
-      key = 'Corequisite'
+      key = KEY_COREQUISITE
     elif label.startswith('anti-requisite'):
-      key = 'Anti-requisite'
+      key = KEY_ANTIREQUISITE
     elif label.startswith('advisory'):
-      key = 'Advisory Prerequisite'
+      key = KEY_ADVISORY_PREREQUISITE
     else:
       print(f"Warning: unrecognized label '{label}' in line: {line}")
 
@@ -85,14 +94,14 @@ def parse_requisite_line(line, rec):
 def parse_course_block(program, number, name, block):
   """Return a dict with all required fields for one course."""
   rec = {
-    'program': program,
-    'number': number,
-    'name': name,
-    'credit': get_credits(block),
-    'prerequisite': '',
-    'Corequisite': '',
-    'Anti-requisite': '',
-    'Advisory Prerequisite': '',
+    KEY_PROGRAM: program,
+    KEY_NUMBER: number,
+    KEY_NAME: name,
+    KEY_CREDIT: get_credits(block),
+    KEY_PREREQUISITE: '',
+    KEY_COREQUISITE: '',
+    KEY_ANTIREQUISITE: '',
+    KEY_ADVISORY_PREREQUISITE: '',
   }
 
   for raw_line in block.splitlines():
@@ -105,7 +114,8 @@ def parse_course_block(program, number, name, block):
 
 def main():
   if len(sys.argv) < 2:
-    print("Usage: python script.py <catalog_file.txt>")
+    print("Usage: python parse_catalog.py <path_to_catalog_text_file>")
+    print("Example: python parse_catalog.py ../documents/unparsed/cse_courses.txt")
     sys.exit(1)
 
   catalog_path = sys.argv[1]
