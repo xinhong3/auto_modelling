@@ -151,8 +151,8 @@ Req4(S) :-
   
 // Requirement 5
 .decl Req5(s: StudentId)
-Req5(S) :- PassedWith_C_Or_Higher(S, "mat221").
-Req5(S) :- PassedWith_C_Or_Higher(S, "mat222").
+Req5(S) :- PassedWith_C_Or_Higher(S, "mat211").
+Req5(S) :- PassedWith_C_Or_Higher(S, "mat210").
 
 // Requirement 6
 .decl Req6(s: StudentId)

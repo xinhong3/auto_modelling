@@ -1,0 +1,394 @@
+AMS 102: Elements of Statistics
+The use and misuse of statistics in real life situations; basic statistical measures of central tendency and of dispersion, frequency distributions, elements of probability, binomial and normal distributions, small and large sample hypothesis testing, confidence intervals, chi square test, and regression. May not be taken by students with credit for AMS 110, 310, 311, 312; ECO 320; POL 201; PSY 201; or SOC 202. This course has been designated as a High Demand/Controlled Access (HD/CA) course. Students registering for HD/CA courses for the first time will have priority to do so.
+
+Prerequisite: Satisfaction of entry skill in mathematics requirement (Skill 1) or satisfactory completion of D.E.C. C or QPS; Non AMS majors only
+
+Anti-requisite: May not be taken by students with credit for AMS 110 or AMS 310.
+
+DEC:     C
+SBC:     QPS
+3 credits
+
+​
+AMS 103: Applied Mathematics in Modern Technology
+Technologies that drive our modern world rely critically on applied mathematics. This course explores "How does it work?" for selected technologies that rely on mathematics and statistics, e.g., internet search, social networking, financial markets, online auctions, cell phones, DNA sequencing, GPS, Wii, Google maps, and more.
+
+Prerequisite: Level 3 or higher on the mathematics placement examination
+
+SBC:     QPS, TECH
+
+3 credits
+
+​
+AMS 104: Spreadsheet Technology and Applications
+Spreadsheets are a critically important tool in many careers, particularly in quantitative fields. This course explores how to use spreadsheets and how to use them to model real-world situations, such as project management, optimization, budgeting, finance, and more.
+
+Prerequisite: Level 2+ or higher on the mathematics placement examination or MAT 123 or higher
+
+SBC:     QPS, TECH
+
+3 credits
+
+​
+AMS 110: Probability and Statistics in the Life Sciences
+A survey of probability theory and statistical techniques with applications to biological and biomedical situations. Topics covered include Markov chain models; binomial, Poisson, normal, exponential, and chi square random variables; tests of hypotheses; confidence intervals; tests; and analysis of variance, regression, and contingency tables. May not be taken for credit in addition to AMS 310. This course has been designated as a High Demand/Controlled Access (HD/CA) course. Students registering for HD/CA courses for the first time will have priority to do so.
+
+Prerequisite: AMS 151 or MAT 125 or 131.
+
+Anti-requisite: May not be taken by students with credit for AMS 102 or AMS 310
+
+SBC:     QPS
+3 credits
+
+​
+AMS 151: Applied Calculus I
+A review of functions and their applications; analytic methods of differentiation; interpretations and applications of differentiation; introduction to integration. Intended for CEAS majors. Not for credit in addition to MAT 125 or 126 or 131 or 141 or 171. This course has been designated as a High Demand/Controlled Access (HD/CA) course. Students registering for HD/CA courses for the first time will have priority to do so.
+
+Prerequisite: B or higher in MAT 123 or level 5 on the mathematics placement examination
+
+DEC:     C
+SBC:     QPS
+
+3 credits
+
+​
+AMS 161: Applied Calculus II
+Analytic and numerical methods of integration; interpretations and applications of integration; differential equations models and elementary solution techniques; phase planes; Taylor series and Fourier series. Intended for CEAS majors. Not for credit in addition to MAT 127, MAT 132, MAT 142, or MAT 171. This course has been designated as a High Demand/Controlled Access (HD/CA) course. Students registering for HD/CA courses for the first time will have priority to do so.
+
+Prerequisite: C or higher in AMS 151 or MAT 131, or level 7 on the mathematics placement examination
+
+DEC:     C
+SBC:     QPS
+
+3 credits
+
+​
+AMS 210: Applied Linear Algebra
+An introduction to the theory and use of vectors and matrices. Matrix theory including systems of linear equations. Theory of Euclidean and abstract vector spaces. Eigenvectors and eigenvalues. Linear transformations. May not be taken for credit in addition to MAT 211.
+
+Prerequisite: AMS 151 or MAT 131 or corequisite MAT 126 or level 7 or higher on the mathematics placement exam
+
+SBC:     STEM+
+
+3 credits
+
+​
+AMS 261: Applied Calculus III
+Vector algebra and analytic geometry in two and three dimensions; multivariable differential calculus and tangent planes; multivariable integral calculus; optimization and Lagrange multipliers; vector calculus including Green's and Stokes's theorems. May not be taken for credit in addition to MAT 203 or 205.
+
+Prerequisite: AMS 161 or MAT 127 or 132 or MPE level 9
+
+SBC:     STEM+
+
+4 credits
+
+​
+AMS 300: Writing in Applied Mathematics
+See Requirements for the Major in Applied Mathematics and Statistics, Upper Division Writing Requirement.
+
+Prerequisites: WRT 102; AMS major; U3 or U4 standing
+
+SBC:     SPK, WRTD
+
+1 credit, S/U grading
+
+​
+AMS 301: Finite Mathematical Structures
+An introduction to graph theory and combinatorial analysis. The emphasis is on solving applied problems rather than on theorems and proofs. Techniques used in problem solving include generating functions, recurrence relations, and network flows. This course develops the type of mathematical thinking that is fundamental to computer science and operations research.
+
+Prerequisite: AMS 210 or MAT 211 or AMS 361 or MAT 303
+
+SBC:     STEM+
+
+3 credits
+
+​
+AMS 303: Graph Theory
+Paths and circuits, trees and tree based algorithms, graph coloring, digraphs, network flows, matching theory, matroids, and games with graphs.
+
+Prerequisite: AMS 301
+
+
+3 credits
+
+​
+AMS 310: Survey of Probability and Statistics
+A survey of data analysis, probability theory, and statistics. Stem and leaf displays, box plots, schematic plots, fitting straight line relationships, discrete and continuous probability distributions, conditional distributions, binomial distribution, normal and t distributions, confidence intervals, and significance tests. May not be taken for credit in addition to ECO 320. This course has been designated as a High Demand/Controlled Access (HD/CA) course. Students registering for HD/CA courses for the first time will have priority to do so.
+
+Prerequisite: AMS 161 or MAT 132 or MAT 127
+
+SBC:     STEM+
+
+3 credits
+
+​
+AMS 311: Probability Theory
+Probability spaces, random variables, moment generating functions, algebra of expectations, conditional and marginal distributions, multivariate distributions, order statistics, law of large numbers.
+
+Prerequisites: AMS 301 and 310 or permission of instructor
+
+Corequisites: MAT 203 or AMS 261
+
+3 credits
+
+​
+AMS 315: Data Analysis
+A continuation of AMS 310 that covers two sample t-tests, contingency table methods, the one-way analysis of variance, and regression analysis with one and multiple independent variables. Student projects analyze data provided by the instructor and require the use of a statistical computing package such as SAS or SPSS. An introduction to ethical and professional standards of conduct for statisticians will be provided.
+
+Prerequisite: AMS 310
+
+SBC:     CER, ESI
+
+3 credits
+
+​
+AMS 316: Introduction to Time Series Analysis
+Trend and seasonal components of time series models, autoregressive and moving average (ARMA) models, Box-Jenkins methodology, Portmanteau test, unit-root, generalized autoregressive conditionally heteroskedasticity (GARCH) models, exponential GARCH, stochastic volatility models. This course is offered as both AMS 316 and AMS 586.
+
+Prerequisite: AMS 311 and AMS 315
+
+SBC:     SBS+
+
+3 credits
+
+​
+AMS 317: Introduction to Linear Regression Analysis
+Basic inference procedures and linear regression, model adequacy checking, transformations and weighted least squares, handling with influential observations and outliers, polynomial regression modeling, use of indicator variables, multicollinearity, variable selection, introduction of logistic regression, conventional and less common uses of linear regression in today's cutting-edge scientific research. Understanding of the basic principles for applied regression model-building techniques in various fields of study, including engineering, management and the health sciences.
+
+Prerequisite: AMS 315; AMS 210 or MAT 211
+
+
+3 credits
+
+​
+AMS 318: Financial Mathematics
+This course will focus on accumulation functions, yield rates, annuities, loan repayment, term structure of interest rates/spot rates/forward rates, options, duration/convexity. This course follows the syllabus for the Financial Mathematics (FM) Exam of the Society of Actuaries and prepares students to pass the FM Exam.
+
+Prerequisite: AMS 310
+
+SBC:     WRTD
+
+3 credits
+
+​
+AMS 320: Introduction to Quantitative Finance
+The course introduces the main classes of financial securities, the mathematical tools employed to model their prices, and common models for risk and investment management. Building realistic models relies on having a working knowledge of the empirical properties of financial asset returns which is another focus of the course. R is used as an environment for modeling.
+
+Prerequisite: AMS 311
+
+
+3 credits
+
+​
+AMS 325: Computing and Programming Fundamentals in Applied Mathematics and Statistics
+Introduction to programming in MATLAB and Python, including scripting, basic data structures, algorithms, scientific computing, and software engineering. Homework projects will focus on using computation to solve linear algebra, data analysis, and other mathematical problems.
+
+Prerequisite: AMS 210 or MAT 211; AMS major
+
+NOTE: not for AMS2MAJ. Those students should contact the AMS dept.
+
+3 credits
+
+​
+AMS 326: Numerical Analysis
+Direct and indirect methods for the solution of linear and nonlinear equations. Computation of eigenvalues and eigenvectors of matrices. Quadrature, differentiation, and curve fitting. Numerical solution of ordinary and partial differential equations. May not be taken for credit in addition to CIV 350 or MEC 320.
+
+Prerequisites: CSE 101; AMS 161; basic skills in using a high-level programming language (C, C++, or Java).
+
+Advisory prerequisite: AMS 210
+
+3 credits
+
+​
+AMS 332: Computational Modeling of Physiological Systems
+Introduces students to the fundamental principles underlying computational modeling of complex physiological systems. A major focus of the course will be on the process by which a model of a biological system is developed. Students will be introduced to the mathematical methods required for the modeling of complex systems (including stochastic processes and both temporal and spatial dynamics) as well as to tools for computational simulation. Roughly one half of the class will focus on models for general cellular physiology, while the remaining half will focus on the development of higher-level models of a particular physiological system (for example, the neurobiological systems underlying learning). This course is offered as both AMS 332 and BIO 332 and is intended for STEM majors who have already completed the foundational courses in their major. Students who satisfy the pre-requisites but do not have a deeper background in some STEM field may find the class very challenging and should ask the instructor for guidance before registering.
+
+Prerequisite: MAT 127 or MAT 132 or AMS 161 or MPE level 9 and any one of the following: BIO 202 or BIO 203 or CHE 132 or CHE 331 or PHY 127 or PHY 132
+
+
+3 credits
+
+​
+AMS 333: Mathematical Biology
+This course introduces the use of mathematics and computer simulation to study a wide range of problems in biology. Topics include the modeling of populations, the dynamics of signal transduction and gene-regulatory networks, and simulation of protein structure and dynamics. A computer laboratory component allows students to apply their knowledge to real-world problems.
+
+Prerequisites: AMS 161 or MAT 132; U3 or U4 standing; or permission of the instructor
+
+SBC:     EXP+, WRTD
+
+3 credits
+
+​
+AMS 335: Game Theory
+Introduction to game theory fundamentals with special emphasis on problems from economics and political science. Topics include strategic games and Nash equilibrium, games in coalitional form and the core, bargaining theory, measuring power in voting systems, problems of fair division, and optimal and stable matching. This course is offered as both AMS 335 and ECO 355.
+
+Prerequisites: MAT 126 or 131 or AMS 151; C or higher in ECO 303
+
+SBC:     SBS+
+
+3 credits
+
+​
+AMS 341: Operations Research I: Deterministic Models
+Linear programming with a view toward its uses in economics and systems analysis. Linear algebra and geometric foundations of linear programming; simplex method and its variations; primal dual programs; formulation and interpretation of linear programming models, including practical problems in transportation and production control. Optional computer projects. AMS 341 and 342 may be taken in either order, though it is recommended that AMS 341 be taken first. Not for credit in addition to EST 342.
+
+Prerequisites: AMS 210 or MAT 211 or MAT 307 and MAT 308
+
+SBC:     SBS+
+
+3 credits
+
+​
+AMS 342: Operations Research II: Stochastic Models
+Methods and techniques for stochastic modeling and optimization, with applications to queueing theory, Markov chains, inventory theory, games, and decisions. AMS 341 and 342 may be taken in either order, though it is recommended that AMS 341 be taken first.
+
+Prerequisites: AMS 210 or MAT 211; AMS 311
+
+SBC:     SBS+
+
+3 credits
+
+​
+AMS 345: Computational Geometry
+The design and analysis of efficient algorithms to solve geometric problems that arise in computer graphics, robotics, geographical information systems, manufacturing, and optimization. Topics include convex hulls, triangulation, Voronoi diagrams, visibility, intersection, robot motion planning, and arrangements. This course is offered as both AMS 345 and CSE 355.
+
+Prerequisites: AMS 301; programming knowledge of C or C++ or Java
+
+
+3 credits
+
+​
+AMS 351: Applied Algebra
+Topics in algebra: groups, informal set theory, relations, homomorphisms. Applications: error correcting codes, Burnside's theorem, computational complexity, Chinese remainder theorem. This course is offered as both AMS 351 and MAT 312.
+
+Prerequisite: C or higher in AMS 210 or MAT 211 or MAT 220 or MAT 308
+
+Advisory Prerequiste: MAT 200 or CSE 250 or equivalent
+
+3 credits
+
+​
+AMS 361: Applied Calculus IV: Differential Equations
+Homogeneous and inhomogeneous linear differential equations; systems of linear differential equations; solution with power series and Laplace transforms; partial differential equations and Fourier series. May not be taken for credit in addition to the equivalent MAT 303.
+
+Prerequisite: AMS 161 or MAT 127 or 132 or MPE level 9
+
+SBC:     STEM+
+
+4 credits
+
+​
+AMS 380: Data Mining
+This course will teach the basic ingredients of classical and contemporary statistical data mining methods including dimension reduction, model selection, pattern recognition, and predictive modeling using traditional general linear models and generalized linear models, and modern statistical learning methods such as decision tree, random forest, neural networks, etc. We will also teach how to run these procedures with the programming language Python.
+
+Prerequisite: AMS 210 or MAT 211 or MAT 307; AMS 311
+
+
+3 credits
+
+​
+AMS 394: Statistical Laboratory
+Designed for students interested in statistics and their applications. Basic statistical techniques including sampling, design, regression, and analysis of variance are introduced. Includes the use of statistical packages such as SAS and R. Students translate realistic research problems into a statistical context and perform the analysis.
+
+Prerequisite: AMS 310 or AMS 315
+
+SBC:     CER, ESI, EXP+
+
+3 credits
+
+​
+AMS 410: Actuarial Mathematics
+Integrates calculus and probability with risk assessment and insurance in a quantitative manner to prepare students for the first actuarial examination.
+
+Prerequisites: AMS 261 or MAT 203; AMS 310; AMS 311 or 315
+
+
+3 credits
+
+​
+AMS 412: Mathematical Statistics
+Estimation, confidence intervals, Neyman Pearson lemma, likelihood ratio test, hypothesis testing, chi square test, regression, analysis of variance, nonparametric methods.
+
+Prerequisite: AMS 311
+
+SBC:     CER, ESI, EXP+
+
+3 credits
+
+​
+AMS 420: Investment Science Foundations
+This course focuses on fundamental principles of financial engineering and investment science such as cash flow streams, arbitrage, risk aversion, pricing of finance instruments, interest rate term structure, fixed income instruments duration, bond portfolio immunization, Markowitz mean-variance portfolio theory, Capital Asset Pricing Model and fixed proportion investment strategy.
+
+Prerequisite: B+ or better in AMS 311
+
+Advisory Prerequisite: AMS 341
+
+3 credits
+
+​
+AMS 441: Business Enterprise
+Explores the strategy and technology of business enterprises. Integrates the practice of engineering and quantitative methods with the operations of a business in today's globalized environment, whether in product development, financial management, or e-commerce.
+
+Prerequisite: Junior or Senior Standing
+
+
+3 credits
+
+​
+AMS 458: Speak Effectively Before an Audience
+A zero credit course that may be taken in conjunction with AMS 475 course that provides opportunity to achieve the learning outcomes of the Stony Brook Curriculum's SPK learning objective.
+
+Pre- or corequisite: WRT 102 or equivalent; permission of the instructor
+
+SBC:     SPK
+
+0 credit, S/U grading
+
+​
+AMS 459: Write Effectively in Applied Mathematics
+A zero credit course that may be taken in conjunction with AMS 487, with permission of the instructor. The course provides opportunity to practice the skills and techniques of effective academic writing and satisfies the learning outcomes of the Stony Brook Curriculum's WRTD learning objective.
+
+Prerequisite: WRT 102; permission of the instructor
+
+SBC:     WRTD
+
+0 credit, S/U grading
+
+​
+AMS 475: Undergraduate Teaching Practicum
+Students assist the faculty in teaching by conducting recitation or laboratory sections that supplement a lecture course. The student receives regularly scheduled supervision from the faculty advisor. May be used as an open elective only and repeated once.
+
+Prerequisites: U4 standing as an undergraduate major within the college; a minimum g.p.a. of 3.00 in all Stony Brook courses and the grade of B or better in the course in which the student is to assist; permission of department
+
+SBC:     EXP+, SPK
+
+3 credits
+
+​
+AMS 476: Undergraduate Teaching Practicum
+Students assist the faculty in teaching by conducting recitation or laboratory sections that supplement a lecture course. The student receives regularly scheduled supervision from the faculty advisor. May be used as an open elective only and repeated once.
+
+Prerequisites: U4 standing as an undergraduate major within the college; a minimum g.p.a. of 3.00 in all Stony Brook courses and the grade of B or better in the course in which the student is to assist; permission of department
+
+SBC:     EXP+, SPK
+
+3 credits
+
+​
+AMS 487: Research in Applied Mathematics
+An independent research project with faculty supervision. Permission to register requires a B average and the agreement of a faculty member to supervise the research. May be repeated once. Only 3 credits of research electives (AMS 487, CSE 487, MEC 499, ESE 499, ESM 499, EST 499, ISE 487) may be counted toward engineering technical elective requirements.
+
+Prerequisites: Permission of instructor and department
+
+SBC:     EXP+, WRTD
+
+0-3 credits
+
+​
+AMS 492: Topics in Applied Mathematics
+Treatment of an area of applied mathematics that expands upon the undergraduate curriculum. Topics may include applied mathematics, statistics, or operations research and change from semester to semester. Semester supplements to this Bulletin contain specific description when course is offered. May be repeated once, as the topic changes.
+
+Prerequisite: Permission of instructor
+
+
+3 credits

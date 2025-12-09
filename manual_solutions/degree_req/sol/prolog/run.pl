@@ -2,13 +2,13 @@
 :- import format/2 from format.
 :- import member/2 from basics.
 
-:- [xsb_rules].
+:- [degree_requirement].
 
-:- load_csv('input/letter_gpa.csv',   letter_gpa(atom,float)).
-:- load_csv('input/course.csv',       course(atom,atom,integer,integer)).
-:- load_csv('input/student.csv',      student(atom,atom,atom)).
-:- load_csv('input/taken.csv',        taken(atom,atom,atom,atom,integer)).
-:- load_csv('input/course_group.csv', course_group(atom,atom)).
+:- load_csv('../../input/letter_gpa.csv',   letter_gpa(atom,float)).
+:- load_csv('../../input/course.csv',       course(atom,atom,integer,integer)).
+:- load_csv('../../input/student.csv',      student(atom,atom,atom)).
+:- load_csv('../../input/taken.csv',        taken(atom,atom,atom,atom,integer)).
+:- load_csv('../../input/course_group.csv', course_group(atom,atom)).
 
 prog_req(cse_major, [1,2,3,4,5,6,7,8,9,10,residency,total_credits]).
 

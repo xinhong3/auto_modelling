@@ -1,4 +1,5 @@
 :- import aggregate_all/3 from c_aggregate.
+:- import member/2 from basics.
 
 is_letter_grade(G) :-
   letter_gpa(G, _).
@@ -22,6 +23,9 @@ passed_with_c_or_higher(S, Cid) :-
 is_cse_upper_electives(C) :-
   course(C, cse, Num, _),
   Num >= 300.
+
+course_group(cse_upper_electives, C) :-
+  is_cse_upper_electives(C).
 
 course_taken_for_letter_grade(S, C) :-
   student(S, _, _),
@@ -61,80 +65,41 @@ gpa(S, GPA) :-
 
 req1_option1(S) :-
   student(S, _, _),
-  aggregate_all(
-    count,
-    (passed_with_c_or_higher(S, C), course_group(cse_maj_req1_opt1, C)),
-    NReq
-  ),
-  NReq is 4,
-  (passed_with_c_or_higher(S, C2); course_group(cse_maj_req1_choice, C2)).
+  passed_all_courses_in_group(S, cse_maj_req1_opt1),
+  (passed_with_c_or_higher(S, C2), course_group(cse_maj_req1_choice, C2)).
 
 req1_option2(S) :-
   student(S, _, _),
-  aggregate_all(
-    count,
-    (passed_with_c_or_higher(S, C), course_group(cse_maj_req1_opt2, C)),
-    NReq
-  ),
-  NReq is 5,
+  passed_all_courses_in_group(S, cse_maj_req1_opt2),
   (passed_with_c_or_higher(S, C2), course_group(cse_maj_req1_choice, C2)).
 
 req(cse_major, 1, S) :-
-  req1_option1(S).
-req(cse_major, 1, S) :-
-  req1_option2(S).
+  req1_option1(S); req1_option2(S).
 
 req(cse_major, 2, S) :-
   student(S, _, _),
-  aggregate_all(
-    count,
-    (passed_with_c_or_higher(S, C), course_group(cse_maj_req2, C)),
-    NCore
-  ),
-  NCore is 4,
-  (passed_with_c_or_higher(S, C2); course_group(cse_maj_req2_theory, C2)),
-  (passed_with_c_or_higher(S, C3); course_group(cse_maj_req2_algo, C3)).
+  passed_all_courses_in_group(S, cse_maj_req2),
+  (passed_with_c_or_higher(S, C2), course_group(cse_maj_req2_theory, C2)),
+  (passed_with_c_or_higher(S, C3), course_group(cse_maj_req2_algo, C3)).
 
 req(cse_major, 3, S) :-
   student(S, _, _),
-  aggregate_all(
-    count,
-    (passed_with_c_or_higher(S, C), is_cse_upper_electives(C)),
-    N
-  ),
-  N >= 4.
+  passed_num_courses_in_group(S, cse_upper_electives, 4).
 
 req(cse_major, 4, S) :-
   student(S, _, _),
-  aggregate_all(
-    count,
-    (passed_with_c_or_higher(S, C), course_group(cse_maj_req4_seq1, C)),
-    N
-  ),
-  N is 2.
+  passed_all_courses_in_group(S, cse_maj_req4_seq1).
 
 req(cse_major, 4, S) :-
   student(S, _, _),
-  aggregate_all(
-    count,
-    (passed_with_c_or_higher(S, C), course_group(cse_maj_req4_seq2, C)),
-    N
-  ),
-  N is 3.
+  passed_all_courses_in_group(S, cse_maj_req4_seq2).
 
 req(cse_major, 4, S) :-
   student(S, _, _),
-  aggregate_all(
-    count,
-    (passed_with_c_or_higher(S, C), course_group(cse_maj_req4_seq3, C)),
-    N
-  ),
-  N is 2.
+  passed_all_courses_in_group(S, cse_maj_req4_seq3).
 
 req(cse_major, 5, S) :-
-  passed_with_c_or_higher(S, mat221).
-req(cse_major, 5, S) :-
-  passed_with_c_or_higher(S, mat222).
+  passed_with_c_or_higher(S, mat211); passed_with_c_or_higher(S, ams210).
 
 req(cse_major, 6, S) :-
   passed_with_c_or_higher(S, ams301),
