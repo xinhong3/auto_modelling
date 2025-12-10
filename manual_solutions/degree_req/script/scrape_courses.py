@@ -1,3 +1,14 @@
+"""
+Fetches course pages from the SBU Undergraduate Bulletin,
+parses course information (name, credits, requisites, etc.),
+and writes one CSV file per program.
+
+Usage:
+    python sbu_course_scraper.py <list of programs> ...
+
+Example:
+    python sbu_course_scraper.py cse mat geo
+"""
 import re
 import csv
 import sys
@@ -149,8 +160,6 @@ def parse_program(prog: str):
             rows.append(rec)
 
     return rows
-
-# ----------------- main -----------------
 
 def main():
     if len(sys.argv) < 2:
